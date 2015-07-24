@@ -1,3 +1,6 @@
+http://blog.antoine.li/2013/03/10/tennis_tdd/
+http://www.slideshare.net/pkofler/refactoring-the-tennis-kata-2013
+http://brendan.enrick.com/post/Coding-Katas-and-Exercises
 The rules given were the following:
 
 1. A game is won by the first player to have won at least four points in total and at least two points more than the opponent.
