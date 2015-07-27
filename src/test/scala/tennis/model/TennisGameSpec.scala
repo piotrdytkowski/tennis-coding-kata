@@ -24,14 +24,25 @@ class TennisGameSpec extends UnitTest {
       (Array(p1, p1), (Thirty(), Love())),
       (Array(p1, p1, p1), (Fourty(), Love()))
     )
-    assertScores(possibleScores)
+    assertScores(possibleScores, InPlay())
   }
 
-  def assertScores(data: Array[(Array[Player], (Score, Score))]): Unit = {
+  it should "record the game was won" in {
+    val game = TennisGame(p1, p2)
+    val possibleScores: Array[(Array[Player], (Score, Score))] = Array(
+      (Array(p1, p1, p1, p1), (GameWon(), Love())),
+      (Array(p1, p2, p1, p2, p1, p1), (GameWon(), Thirty())),
+      (Array(p1, p2, p1, p2, p1, p2, p1, p1), (GameWon(), Deuce()))
+    )
+    assertScores(possibleScores, GameFinished())
+  }
+
+  def assertScores(data: Array[(Array[Player], (Score, Score))], gameState: GameState): Unit = {
     data.foreach(row => {
       var game = TennisGame(p1, p2)
       row._1.foreach(p => game = game.achievePoint(p))
       game.getScore() should be (row._2)
+      game.getState() should be (gameState)
     })
   }
 }
